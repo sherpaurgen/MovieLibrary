@@ -12,6 +12,7 @@ export default class Movies extends Component {
     currentPage: 1,
     genres: [],
   };
+
   //get the movie and genres list
   componentDidMount() {
     this.setState({ movies: getMovies(), genres: getGenres() });
@@ -24,14 +25,24 @@ export default class Movies extends Component {
     this.setState({ currentPage: pg });
   };
   handleGenreSelect = (genre) => {
-    console.log(genre);
+    console.log("selected genreobj: ", genre);
+    this.setState({ selectedGenre: genre });
   };
 
   render() {
-    console.log("genres item: ", this.state.genres);
     const count = this.state.movies.length;
-    const { pageSize, currentPage, movies: allMovies } = this.state;
-    const movies = Paginate(allMovies, currentPage, pageSize);
+    const {
+      pageSize,
+      currentPage,
+      selectedGenre,
+      movies: allMovies,
+    } = this.state;
+
+    const filteredmovie = selectedGenre
+      ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+      : allMovies;
+
+    const movies = Paginate(filteredmovie, currentPage, pageSize);
 
     if (count === 0) return <p>There are no movies</p>;
 
@@ -41,10 +52,13 @@ export default class Movies extends Component {
           <ListGroup
             items={this.state.genres}
             onItemSelect={this.handleGenreSelect}
+            textProperty="name"
+            valueProperty="_id"
+            selectedItem={this.state.selectedGenre}
           />
         </div>
         <div className="col">
-          <p>There are currently {this.state.movies.length} Movies</p>
+          <p>There are currently {filteredmovie.length} Movies</p>
           <table className="table">
             <thead>
               <tr>
@@ -76,7 +90,7 @@ export default class Movies extends Component {
             </tbody>
           </table>
           <Pagination
-            itemsCount={count}
+            itemsCount={filteredmovie.length}
             pageSize={pageSize}
             onPageChange={this.handlePageChange}
             currentPage={currentPage}

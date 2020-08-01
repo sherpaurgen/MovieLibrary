@@ -1,4 +1,4 @@
-import Movies from "../components/movies";
+//import Movies from "../components/movies";
 
 export const genres = [
   { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
@@ -6,6 +6,6 @@ export const genres = [
   { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
 ];
 
-export function getGenres() {
+export const getGenres = () => {
   return genres.filter((g) => g);
-}
+};

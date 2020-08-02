@@ -38,7 +38,14 @@ export default class Movies extends Component {
     console.log("liked man!");
   };
   handleSort = (path) => {
-    this.setState({ sortedColumn: { path: path, order: "asc" } });
+    const sortedColumn = { ...this.state.sortedColumn };
+    if (sortedColumn.path === path) {
+      sortedColumn.order = sortedColumn.order === "asc" ? "desc" : "asc";
+    } else {
+      sortedColumn.path = path;
+      sortedColumn.order = "asc";
+    }
+    this.setState({ sortedColumn: sortedColumn });
   };
 
   render() {

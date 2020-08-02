@@ -37,14 +37,7 @@ export default class Movies extends Component {
   handleLike = () => {
     console.log("liked man!");
   };
-  handleSort = (path) => {
-    const sortedColumn = { ...this.state.sortedColumn };
-    if (sortedColumn.path === path) {
-      sortedColumn.order = sortedColumn.order === "asc" ? "desc" : "asc";
-    } else {
-      sortedColumn.path = path;
-      sortedColumn.order = "asc";
-    }
+  handleSort = (sortedColumn) => {
     this.setState({ sortedColumn: sortedColumn });
   };
 
@@ -89,6 +82,7 @@ export default class Movies extends Component {
           <p>There are currently {filteredmovie.length} Movies</p>
           <MoviesTable
             movies={movies}
+            sortedColumn={sortedColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}

@@ -8,6 +8,7 @@ const ListGroup = (props) => {
     selectedItem,
     onItemSelect,
   } = props;
+  console.log("xxxxx", items);
 
   return (
     <ul className="list-group">
@@ -19,7 +20,7 @@ const ListGroup = (props) => {
             item === selectedItem ? "list-group-item active" : "list-group-item"
           }
         >
-          {item[textProperty]}{" "}
+          {item[textProperty]}
         </li>
       ))}
     </ul>

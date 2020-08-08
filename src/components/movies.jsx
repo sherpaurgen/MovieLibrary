@@ -55,7 +55,7 @@ export default class Movies extends Component {
       selectedGenre && selectedGenre._id && selectedGenre.name !== "All Genres"
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
         : allMovies;
-    //movie arra objects gets sorted here in beginning and passed on to the MoviesTable component to display in UI where sorted by title and ascending order. sorted list is saved in sorted variable
+    //movie array objects gets sorted here in beginning and passed on to the MoviesTable component to display in UI where sorted by title and ascending order. sorted list is saved in sorted variable
     const sorted = _.orderBy(
       filteredmovie,
       [sortedColumn.path],
@@ -63,6 +63,7 @@ export default class Movies extends Component {
     );
     //sorted array object is paginated and saved to movies variable
     const movies = Paginate(sorted, currentPage, pageSize);
+    console.log("movies>>", movies);
 
     if (count === 0) return <p>There are no movies</p>;
 
@@ -79,6 +80,7 @@ export default class Movies extends Component {
         </div>
         <div className="col">
           <p>There are currently {filteredmovie.length} Movies</p>
+          {/* the default is sortedColumn: { path: "title", order: "asc" } */}
           <MoviesTable
             movies={movies}
             sortedColumn={sortedColumn}

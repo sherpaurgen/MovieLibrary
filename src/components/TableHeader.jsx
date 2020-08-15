@@ -34,7 +34,7 @@ export default class TableHeader extends Component {
 
   render() {
     return (
-      <thead>
+      <thead style={{ cursor: "pointer" }}>
         <tr>
           {this.props.columns.map((col) => (
             <th

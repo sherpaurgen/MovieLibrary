@@ -50,7 +50,7 @@ export default class Movies extends Component {
       sortedColumn,
       movies: allMovies,
     } = this.state;
-
+    // above movies is renamed as allMovies where empty arrary in STATE is replaced by componentDidMount() function
     const filteredmovie =
       selectedGenre && selectedGenre._id && selectedGenre.name !== "All Genres"
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
@@ -63,7 +63,6 @@ export default class Movies extends Component {
     );
     //sorted array object is paginated and saved to movies variable
     const movies = Paginate(sorted, currentPage, pageSize);
-    console.log("movies>>", movies);
 
     if (count === 0) return <p>There are no movies</p>;
 

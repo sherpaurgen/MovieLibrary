@@ -48,6 +48,27 @@ const movies = [
     dailyRentalRate: 3.5,
   },
   {
+    _id: "5b21ca3eebkjsdf099",
+    title: "Aero Fun",
+    genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
+    numberInStock: 7,
+    dailyRentalRate: 3.5,
+  },
+  {
+    _id: "5b21ca3eeb9kj2lkjlksjdlk",
+    title: "Dont do it!",
+    genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
+    numberInStock: 2,
+    dailyRentalRate: 5.5,
+  },
+  {
+    _id: "5b21ca3eeb9kj2lmmdkdkdk",
+    title: "Badboys",
+    genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
+    numberInStock: 12,
+    dailyRentalRate: 9.5,
+  },
+  {
     _id: "5b21ca3eeb7f6fbccd47181b",
     title: "Wedding Crashers",
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },

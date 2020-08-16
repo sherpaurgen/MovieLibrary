@@ -35,7 +35,6 @@ export default class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
   handleLike = (movie) => {
-    console.log("likedMovie=>", movie);
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
@@ -46,8 +45,7 @@ export default class Movies extends Component {
     this.setState({ sortedColumn: sortedColumn });
   };
 
-  render() {
-    const count = this.state.movies.length;
+  getPagedData = () => {
     const {
       pageSize,
       currentPage,
@@ -55,7 +53,6 @@ export default class Movies extends Component {
       sortedColumn,
       movies: allMovies,
     } = this.state;
-    // above movies is renamed as allMovies where empty arrary in STATE is replaced by componentDidMount() function
     const filteredmovie =
       selectedGenre && selectedGenre._id && selectedGenre.name !== "All Genres"
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
@@ -68,9 +65,16 @@ export default class Movies extends Component {
     );
     //sorted array object is paginated and saved to movies variable
     const movies = Paginate(sorted, currentPage, pageSize);
+    return { totalCount: filteredmovie.length, data: movies }; //data set with movies
+  };
+
+  render() {
+    const count = this.state.movies.length;
+    const { pageSize, currentPage, sortedColumn } = this.state;
+    // above movies is renamed as allMovies where empty arrary in STATE is replaced by componentDidMount() function
 
     if (count === 0) return <p>There are no movies</p>;
-
+    const { totalCount, data: movies } = this.getPagedData(); //rename data to movies
     return (
       <div className="row m-5">
         <div className="col-3 ">
@@ -83,7 +87,7 @@ export default class Movies extends Component {
           />
         </div>
         <div className="col">
-          <p>There are currently {filteredmovie.length} Movies</p>
+          <p>There are currently {totalCount} Movies</p>
           {/* the default is sortedColumn: { path: "title", order: "asc" } */}
           <MoviesTable
             movies={movies}
@@ -93,7 +97,7 @@ export default class Movies extends Component {
             onSort={this.handleSort}
           />
           <Pagination
-            itemsCount={filteredmovie.length}
+            itemsCount={totalCount}
             pageSize={pageSize}
             onPageChange={this.handlePageChange}
             currentPage={currentPage}

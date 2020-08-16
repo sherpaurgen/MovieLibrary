@@ -34,8 +34,13 @@ export default class Movies extends Component {
   handleGenreSelect = (genre) => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
-  handleLike = () => {
-    console.log("liked man!");
+  handleLike = (movie) => {
+    console.log("likedMovie=>", movie);
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movies[index] };
+    movies[index].liked = !movies[index].liked;
+    this.setState({ movies });
   };
   handleSort = (sortedColumn) => {
     this.setState({ sortedColumn: sortedColumn });
@@ -67,8 +72,8 @@ export default class Movies extends Component {
     if (count === 0) return <p>There are no movies</p>;
 
     return (
-      <div className="row">
-        <div className="col-3">
+      <div className="row m-5">
+        <div className="col-3 ">
           <ListGroup
             items={this.state.genres}
             onItemSelect={this.handleGenreSelect}

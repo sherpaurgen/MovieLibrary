@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
 
 export default class TableBody extends Component {
   renderCell = (item, column) => {
-    if (column.content) return column.content(item);
+    if (column.content) return column.content(item); // content: <Like ...> or <Delete .../> check moviesTable.jsx
     return _.get(item, column.path);
   };
+
   createKey = (item, column) => {
     return item._id + (column.path || column.key);
   };

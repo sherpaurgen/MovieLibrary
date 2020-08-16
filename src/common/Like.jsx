@@ -7,11 +7,14 @@ export default class Like extends Component {
   render() {
     let classes = fasHeart;
     if (!this.props.liked) classes = farHeart;
+
+    const movie = this.props.movie;
+
     return (
       <FontAwesomeIcon
         icon={classes}
-        onClick={this.props.onLike}
         style={{ cursor: "pointer" }}
+        onClick={this.props.onClick}
       />
     );
   }
